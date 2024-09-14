@@ -102,22 +102,20 @@ class HomePageR extends StatefulWidget {
 
 class _HomePageRState extends State<HomePageR> {
   int _currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    final List<Widget> _pages = [
+  final List<Widget> _pages = [
       HomeScreen(),
       ProfilePage(),
       FavorisPage(),
       ChartPage(),
     ];
 
+  @override
+  Widget build(BuildContext context) {
+    
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _pages,
-      ),
+      body:_pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

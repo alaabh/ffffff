@@ -1,8 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mealed_project/cubit/article/article_cubit.dart';
+import 'package:mealed_project/cubit/profil/profil_cubit.dart';
+import 'package:mealed_project/cubit/restaurant/resturant_cubit.dart';
 import 'package:mealed_project/cubit/singup/signup_cubit.dart';
 import 'package:mealed_project/firebase_options.dart';
 import '../views/login.dart';
+import 'cubit/category/category_cubit.dart';
 import 'cubit/login/login_cubit.dart';
 import 'views/ForgetPassword.dart';
 import 'views/pages/all_categories.dart';
@@ -38,6 +42,18 @@ class MyApp extends StatelessWidget {
       BlocProvider<SignupCubit>(
             create: (context) => SignupCubit(),
           ),
+      BlocProvider<ProfilCubit>(
+            create: (context) => ProfilCubit(),
+          ),
+      BlocProvider<ResturantCubit>(
+            create: (context) => ResturantCubit(),
+          ),
+      BlocProvider<CategoryCubit>(
+            create: (context) => CategoryCubit(),
+          ),
+      BlocProvider<ArticleCubit>(
+            create: (context) => ArticleCubit(),
+          ),
           ]    ,
             child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -51,7 +67,7 @@ class MyApp extends StatelessWidget {
             '/Login': (context) => Login(),
             '/categories': (context) => AllCategories(),
             '/mot_de_passe': (context) => ForgetPassword(),
-            '/profile_resto': (context) => ProfileResto(), 
+            
             '/article': (context) => OneArticle(), 
             '/restaurants': (context) => RestaurantsPage(), 
             '/historique': (context) => HistoryPage(), 

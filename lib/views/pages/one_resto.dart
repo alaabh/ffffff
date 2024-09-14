@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProfileResto extends StatefulWidget {
-  const ProfileResto({Key? key}) : super(key: key);
+  final Map<String, dynamic> restaurant;
+  const ProfileResto({Key? key, required this.restaurant}) : super(key: key);
 
   @override
   _ProfileRestoState createState() => _ProfileRestoState();
@@ -13,32 +14,102 @@ class _ProfileRestoState extends State<ProfileResto> {
   // Example data for items in each category
   final Map<String, List<Map<String, String>>> _menuItems = {
     "Breakfast": [
-      {"title": "Omelette", "description": "A classic omelette with cheese.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
-      {"title": "Pancakes", "description": "Fluffy pancakes with syrup.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
+      {
+        "title": "Omelette",
+        "description": "A classic omelette with cheese.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
+      {
+        "title": "Pancakes",
+        "description": "Fluffy pancakes with syrup.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
     ],
     "Sandwiches": [
-      {"title": "BLT", "description": "Bacon, lettuce, and tomato sandwich.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
-      {"title": "Club Sandwich", "description": "A traditional club sandwich.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
+      {
+        "title": "BLT",
+        "description": "Bacon, lettuce, and tomato sandwich.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
+      {
+        "title": "Club Sandwich",
+        "description": "A traditional club sandwich.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
     ],
     "Pizza": [
-      {"title": "Margherita", "description": "Tomato, mozzarella, and basil.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
-      {"title": "Pepperoni", "description": "Pepperoni and cheese.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
+      {
+        "title": "Margherita",
+        "description": "Tomato, mozzarella, and basil.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
+      {
+        "title": "Pepperoni",
+        "description": "Pepperoni and cheese.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
     ],
     "Sushi": [
-      {"title": "Sushi Roll", "description": "Traditional sushi roll with fish.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
-      {"title": "Sashimi", "description": "Fresh slices of fish.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
+      {
+        "title": "Sushi Roll",
+        "description": "Traditional sushi roll with fish.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
+      {
+        "title": "Sashimi",
+        "description": "Fresh slices of fish.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
     ],
     "Smoothies": [
-      {"title": "Berry Blast", "description": "Mixed berry smoothie.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
-      {"title": "Tropical", "description": "Mango and pineapple smoothie.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
+      {
+        "title": "Berry Blast",
+        "description": "Mixed berry smoothie.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
+      {
+        "title": "Tropical",
+        "description": "Mango and pineapple smoothie.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
     ],
     "Drinks": [
-      {"title": "Lemonade", "description": "Refreshing lemonade.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
-      {"title": "Iced Tea", "description": "Chilled iced tea.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
+      {
+        "title": "Lemonade",
+        "description": "Refreshing lemonade.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
+      {
+        "title": "Iced Tea",
+        "description": "Chilled iced tea.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
     ],
     "Plates": [
-      {"title": "Steak", "description": "Grilled steak with sides.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
-      {"title": "Salmon", "description": "Baked salmon with vegetables.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"},
+      {
+        "title": "Steak",
+        "description": "Grilled steak with sides.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
+      {
+        "title": "Salmon",
+        "description": "Baked salmon with vegetables.",
+        "image":
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPX72zRye0yKp_n8EXUUkyJ54fn-lsfwwzY_y5uvjg241pHEEgV6UbsJK4iraOf2BZYQ&usqp=CAU"
+      },
     ],
   };
 
@@ -141,6 +212,14 @@ class _ProfileRestoState extends State<ProfileResto> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    // BlocProvider.of<ResturantCubit>(context).fetchRestaurantById(widget.id);
+    _selectedCategory = widget.restaurant['category'][0];
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -159,7 +238,7 @@ class _ProfileRestoState extends State<ProfileResto> {
                       child: Padding(
                         padding: EdgeInsets.only(left: 16, bottom: 16),
                         child: Text(
-                          'Nom Resto',
+                          widget.restaurant['name'],
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: MediaQuery.of(context).size.width * 0.05,
@@ -177,8 +256,8 @@ class _ProfileRestoState extends State<ProfileResto> {
                     background: Stack(
                       fit: StackFit.expand,
                       children: [
-                        Image.asset(
-                          'assets/test.png',
+                        Image.network(
+                          widget.restaurant['img'],
                           fit: BoxFit.cover,
                         ),
                         Positioned(
@@ -199,7 +278,8 @@ class _ProfileRestoState extends State<ProfileResto> {
                     ),
                   ),
                   leading: IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 249, 248, 248)),
+                    icon: const Icon(Icons.arrow_back,
+                        color: Color.fromARGB(255, 249, 248, 248)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -207,7 +287,8 @@ class _ProfileRestoState extends State<ProfileResto> {
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
+                    padding: EdgeInsets.all(
+                        MediaQuery.of(context).size.width * 0.04),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -216,15 +297,17 @@ class _ProfileRestoState extends State<ProfileResto> {
                             Icon(Icons.location_on, color: Colors.grey),
                             SizedBox(width: 8),
                             Text(
-                              "Location du restaurant",
+                              widget.restaurant['localisation'],
                               style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.width * 0.04,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.04,
                                 color: Colors.grey,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
                         Text(
                           "Infos :",
                           style: TextStyle(
@@ -232,13 +315,15 @@ class _ProfileRestoState extends State<ProfileResto> {
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
                         Container(
                           padding: EdgeInsets.all(10),
                           color: Color.fromARGB(86, 238, 238, 238),
-                          child: Text("Description du restaurant."),
+                          child: Text(widget.restaurant['description']),
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
                         Text(
                           "Menu :",
                           style: TextStyle(
@@ -246,22 +331,28 @@ class _ProfileRestoState extends State<ProfileResto> {
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.1,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
-                              children: _menuItems.keys.map((category) {
+                              children: (widget.restaurant['category']
+                                      as List<dynamic>)
+                                  .map((category) {
                                 return Padding(
-                                  padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.03),
+                                  padding: EdgeInsets.only(
+                                      right: MediaQuery.of(context).size.width *
+                                          0.03),
                                   child: _menuItem(category),
                                 );
                               }).toList(),
                             ),
                           ),
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.03),
                         Text(
                           "$_selectedCategory Items",
                           style: TextStyle(
@@ -269,12 +360,13 @@ class _ProfileRestoState extends State<ProfileResto> {
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                        Column(
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
+                        /* Column(
                           children: _menuItems[_selectedCategory]!
                               .map((item) => _buildItemCard(item))
                               .toList(),
-                        ),
+                        ), */
                       ],
                     ),
                   ),

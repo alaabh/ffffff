@@ -1,19 +1,23 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../cubit/restaurant/resturant_cubit.dart';
 import '../../widgets/sidebar_popup.dart';
-import 'panier.dart';
-import 'search_bar.dart';
-import 'categories.dart';
-import 'restaurants_list.dart';
 import '../../widgets/themes/carousel_slider.dart';
+import 'categories.dart';
+import 'panier.dart';
+import 'restaurants_list.dart';
+import 'search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
-  
-
   HomeScreen();
 
   @override
   Widget build(BuildContext context) {
+    print("beeeeeeeeeee3");
+    context.read<ResturantCubit>().fetchRestaurants();
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SingleChildScrollView(
@@ -34,7 +38,8 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 30.0, left: 16.0, right: 16.0),
+                  padding:
+                      const EdgeInsets.only(top: 30.0, left: 16.0, right: 16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -139,63 +144,79 @@ class HomeScreen extends StatelessWidget {
                   CategoryCarouselComponent(),
                   SizedBox(height: 20),
                   SpecialCarousel(),
-            SizedBox(height: 20),
-             Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 37,
-                  height: 37,
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    shape: BoxShape.circle,
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: 37,
+                            height: 37,
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.star,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            'Restaurants Ouverts',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/restaurants');
+                        },
+                        child: Text(
+                          'Voir Plus',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  child: Icon(
-                    Icons.star,
-                    color: Colors.white,
-                    size: 20,
+                  SizedBox(height: 10),
+                  BlocBuilder<ResturantCubit, ResturantState>(
+                    builder: (context, state) {
+                      if (state is RestaurantLoading) {
+                        // Show loading indicator while restaurants are being fetched
+                        return Center(child: CircularProgressIndicator());
+                      } else if (state is RestaurantLoaded) {
+                        // Display the list of restaurants
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            child: Column(
+                              children: [
+                                RestaurantListComponent(
+                                  restaurants: state.restaurants,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      } else if (state is RestaurantError) {
+                        // Show error message in case of failure
+                        return Center(child: Text(state.message));
+                      } else {
+                        return Center(child: Text('Unknown state'));
+                      }
+                    },
                   ),
-                ),
-                SizedBox(width: 10),
-                Text(
-                  'Restaurants Ouverts',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-               Navigator.of(context).pushNamed('/restaurants');  
-              },
-              child: Text(
-                'Voir Plus',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                child: Column(
-                  children: [
-                    RestaurantListComponent(),
-                    RestaurantListComponent(), 
-                    
-                  ],
-                ),
-              ),
-            ),],
+                ],
               ),
             ),
           ],

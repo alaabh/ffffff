@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mealed_project/cubit/profil/profil_cubit.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -10,13 +11,25 @@ class _ProfilePageState extends State<ProfilePage> {
   String fullName = "Assem Ben Ahmed";
   String location = "assem@gmail.com";
   List<String> historique = ["Restaurant Marhabe", "Restaurant BestVoice"];
-  List<String> localisation = ["91 cité belvedaire-bizerte", "rue batata -monplaisir"];
+  List<String> localisation = [
+    "91 cité belvedaire-bizerte",
+    "rue batata -monplaisir"
+  ];
   int selectedIndex = 0;
 
   List<Widget> _buildItemList(List<String> items) {
-    return items.map((item) => ListTile(
-      title: Text(item),
-    )).toList();
+    return items
+        .map((item) => ListTile(
+              title: Text(item),
+            ))
+        .toList();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    BlocProvider.of<ProfilCubit>(context).getProfile();
+    super.initState();
   }
 
   @override
@@ -29,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('../../../assets/profileBG.jpg'),
+                image: AssetImage('assets/profileBG.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -47,9 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   IconButton(
                     icon: Icon(Icons.settings, color: Colors.white),
-                    onPressed: () {
-                      // Settings button action
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),
@@ -63,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 120,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('../../../assets/profileBG.jpg'),
+                    image: AssetImage('assets/profileBG.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -84,7 +95,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ],
                       image: DecorationImage(
-                        image: NetworkImage('https://via.placeholder.com/150'), // Add your image URL here
+                        image: NetworkImage(
+                            'https://via.placeholder.com/150'), // Add your image URL here
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -93,7 +105,9 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
-          SizedBox(height: 60), // Adjusted to maintain the space below the CircleAvatar
+          SizedBox(
+              height:
+                  60), // Adjusted to maintain the space below the CircleAvatar
           Text(
             fullName,
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -109,13 +123,14 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
           SizedBox(height: 20),
-           Container(
+          Container(
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildBottomNavigationItem(Icons.history, 'Mon Historique', 0),
-                _buildBottomNavigationItem(Icons.location_on, 'Mes Localisations', 1),
+                _buildBottomNavigationItem(
+                    Icons.location_on, 'Mes Localisations', 1),
               ],
             ),
           ),
@@ -162,12 +177,16 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Icon(
             icon,
-            color: selectedIndex == index ? Colors.green : Color.fromARGB(255, 83, 83, 83),
+            color: selectedIndex == index
+                ? Colors.green
+                : Color.fromARGB(255, 83, 83, 83),
           ),
           Text(
             label,
             style: TextStyle(
-              color: selectedIndex == index ? Colors.green : Color.fromARGB(255, 83, 83, 83),
+              color: selectedIndex == index
+                  ? Colors.green
+                  : Color.fromARGB(255, 83, 83, 83),
             ),
           ),
         ],
